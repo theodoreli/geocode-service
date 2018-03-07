@@ -26,7 +26,9 @@ class Request():
         '''
         for source in self.sources_dict:
             try:
+                # Format the partially formatted `url` string.
                 formatted_url = self.sources_dict[source]['url'](adr=adr)
+
                 with urllib.request.urlopen(formatted_url) as f:
                     res = f.read().decode('utf-8')
                     json_data = json.loads(res)
