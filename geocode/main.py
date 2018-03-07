@@ -18,22 +18,19 @@ def request(adr):
     for url in url_collection:
         try:
             print(url)
-            new = url(adr=adr)
+            new = url[0](adr=adr)
             print(new)
             with urllib.request.urlopen(new) as f:
                 res = f.read().decode('utf-8')
                 json_data = json.loads(res)
-                print(json.dumps(json_data, indent=4, sort_keys=True))
-                lat_keys = ['results', 0, 'geometry', 'location', 'lat']
+                # print(json.dumps(json_data, indent=4, sort_keys=True))
 
                 lat = json_data
-                for k in lat_keys:
-                    #import pdb; pdb.set_trace()
+                for k in url[1]:
                     lat = lat[k]
 
-                lng_keys = ['results', 0, 'geometry', 'location', 'lng']
                 lng = json_data
-                for k in lng_keys:
+                for k in url[2]:
                     lng = lng[k]
 
                 return lat,lng

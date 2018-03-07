@@ -13,15 +13,17 @@ vars = {
 def get_url_gen():
 
     urls = [
-            'https://maps.googleapis.com/maps/api/geocode/json?address={adr}&key={api_key_googlemaps}',
-            'https://geocoder.cit.api.here.com/6.2/geocode.json?app_id={api_key_here_id}&app_code={api_key_here_code}&searchtext={adr}'
+            (('https://maps.googleapis.com/maps/api/geocode/json?'
+             'address={adr}&key={api_key_googlemaps}'),
+             ['results', 0, 'geometry', 'location', 'lat'],
+             ['results', 0, 'geometry', 'location', 'lng']),
+            ('https://geocoder.cit.api.here.com/6.2/geocode.json?app_id={api_key_here_id}&app_code={api_key_here_code}&searchtext={adr}', [], [])
     ]
-#, def(res): res['results']['geometry']['location']['lat']
 
     def partial_functor(x):
-        s = x.format
+        s = x[0].format
         s = partial(s, **vars)
-        return s
+        return s,x[1],x[2]
 
     formated = [partial_functor(url) for url in urls]
     return formated
