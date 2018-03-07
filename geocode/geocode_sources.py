@@ -16,6 +16,7 @@ vars = {
 class GeocodeSources():
     def __init__(self):
         config = configparser.ConfigParser()
+        # TODO: solidify this read
         config.read(op.join('geocode', 'sources.ini'))
 
         self.geocode_sources = {}
