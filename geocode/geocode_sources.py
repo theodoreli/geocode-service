@@ -22,23 +22,12 @@ class GeocodeSources():
         gs = self.geocode_sources
         for section in config.sections():
             gs[section] = {}
-            gs[section]['url'] = config.get(section, 'url')
+            gs[section]['url'] = (config.get(section, 'url')).format
+            gs[section]['url'] = partial(gs[section]['url'], **vars)
+
             gs[section]['lat'] = json.loads(config.get(section, 'lat'))
             gs[section]['long'] = json.loads(config.get(section, 'long'))
-        print(gs)
 
 
     def get_sources_dict(self):
-        def partial_functor(source):
-            s = source['url'].format
-            s = partial(s, **vars)
-            return s,source['lat'],source['long']
-
-        formated = [partial_functor(self.geocode_sources[source]) for source in self.geocode_sources]
-
-        return formated
-
-
-
-
-
+        return self.geocode_sources

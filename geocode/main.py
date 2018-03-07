@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import json
-import os
 import urllib.request
 
 from flask import Flask
@@ -14,24 +13,23 @@ app = Flask(__name__)
 
 geocode_sources = GeocodeSources()
 sources_dict = geocode_sources.get_sources_dict()
+print(sources_dict)
 
 def request(adr):
     for source in sources_dict:
         try:
-            print(source)
-            new = source[0](adr=adr)
-            print(new)
+            new = sources_dict[source]['url'](adr=adr)
             with urllib.request.urlopen(new) as f:
                 res = f.read().decode('utf-8')
                 json_data = json.loads(res)
                 print(json.dumps(json_data, indent=4, sort_keys=True))
 
                 lat = json_data
-                for k in source[1]:
+                for k in sources_dict[source]['lat']:
                     lat = lat[k]
 
                 lng = json_data
-                for k in source[2]:
+                for k in sources_dict[source]['long']:
                     lng = lng[k]
 
                 return lat,lng
