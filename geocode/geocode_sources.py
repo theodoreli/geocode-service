@@ -6,13 +6,13 @@ import os
 import os.path as op
 from functools import partial
 
-vars = {
-    'api_key_googlemaps' : os.environ.get('API_KEY_GOOGLEMAPS'),
-    'api_key_here_id' : os.environ.get('API_KEY_HERE_ID'),
-    'api_key_here_code' : os.environ.get('API_KEY_HERE_CODE')
-}
-
 class GeocodeSources():
+    env_vars = {
+        'api_key_googlemaps' : os.environ.get('API_KEY_GOOGLEMAPS'),
+        'api_key_here_id' : os.environ.get('API_KEY_HERE_ID'),
+        'api_key_here_code' : os.environ.get('API_KEY_HERE_CODE')
+    }
+
     def __init__(self):
         config = configparser.ConfigParser()
         curr_dir = op.dirname(op.realpath(__file__))
@@ -23,7 +23,7 @@ class GeocodeSources():
         for section in config.sections():
             gs[section] = {}
             gs[section]['url'] = (config.get(section, 'url')).format
-            gs[section]['url'] = partial(gs[section]['url'], **vars)
+            gs[section]['url'] = partial(gs[section]['url'], **self.env_vars)
 
             gs[section]['lat'] = json.loads(config.get(section, 'lat'))
             gs[section]['long'] = json.loads(config.get(section, 'long'))
