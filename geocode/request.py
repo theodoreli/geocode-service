@@ -42,4 +42,5 @@ class Request():
 
                     return lat, lng
             except BaseException:
-                L.info('Error in source {}'.format(source))
+                L.info('Geocode source {} produced error: {}'.
+                       format(source, BaseException))
