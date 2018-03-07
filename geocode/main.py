@@ -6,7 +6,6 @@ import os
 import sys
 
 from flask import Flask
-from flask import Response
 
 from request import Request
 
@@ -25,16 +24,18 @@ def index():
             ' you want to Geocode')
     return help
 
+
 @app.route('/geocode/<address>')
 def get_geocode(address):
     '''Given an address, return the lattitude and longitude as a string'''
     L.info('Received address: {}'.format(address))
-    lat,lng = req.request(address)
+    lat, lng = req.request(address)
 
-    lat_long = '{},{}'.format(str(lat),str(lng))
+    lat_long = '{},{}'.format(str(lat), str(lng))
     L.info('Latitude and Logitude respectively: {}'.format(lat_long))
 
     return lat_long
+
 
 if __name__ == '__main__':
     L.info('Starting Flask application')

@@ -6,11 +6,12 @@ import os
 import os.path as op
 from functools import partial
 
+
 class GeocodeSources():
     env_vars = {
-        'api_key_googlemaps' : os.environ.get('API_KEY_GOOGLEMAPS'),
-        'api_key_here_id' : os.environ.get('API_KEY_HERE_ID'),
-        'api_key_here_code' : os.environ.get('API_KEY_HERE_CODE')
+        'api_key_googlemaps': os.environ.get('API_KEY_GOOGLEMAPS'),
+        'api_key_here_id': os.environ.get('API_KEY_HERE_ID'),
+        'api_key_here_code': os.environ.get('API_KEY_HERE_CODE')
     }
 
     def __init__(self):
@@ -28,7 +29,7 @@ class GeocodeSources():
         config.read(op.join(curr_dir, 'sources.ini'))
 
         self.geocode_sources = {}
-        gs = self.geocode_sources # eg. ['google', 'here']
+        gs = self.geocode_sources  # eg. ['google', 'here']
         for section in config.sections():
             gs[section] = {}
 

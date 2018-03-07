@@ -8,6 +8,7 @@ from geocode_sources import GeocodeSources
 
 L = logging.getLogger()
 
+
 class Request():
     def __init__(self):
         geocode_sources = GeocodeSources()
@@ -39,6 +40,6 @@ class Request():
                     for k in self.sources_dict[source]['long']:
                         lng = lng[k]
 
-                    return lat,lng
-            except:
+                    return lat, lng
+            except BaseException:
                 L.info('Error in source {}'.format(source))
