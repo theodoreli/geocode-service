@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
-import os
-import os.path as op
-
 import logging
-import os
 import urllib.request
 
 from geocode_sources import GeocodeSources

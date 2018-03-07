@@ -4,7 +4,6 @@ import configparser
 import json
 import os
 import os.path as op
-import string
 from functools import partial
 
 vars = {
