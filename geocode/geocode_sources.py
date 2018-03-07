@@ -17,7 +17,10 @@ def get_url_gen():
              'address={adr}&key={api_key_googlemaps}'),
              ['results', 0, 'geometry', 'location', 'lat'],
              ['results', 0, 'geometry', 'location', 'lng']),
-            ('https://geocoder.cit.api.here.com/6.2/geocode.json?app_id={api_key_here_id}&app_code={api_key_here_code}&searchtext={adr}', [], [])
+            ('https://geocoder.cit.api.here.com/6.2/geocode.json?app_id={api_key_here_id}&app_code={api_key_here_code}&searchtext={adr}',
+                ['Response', 'View', 0, 'Result', 0, 'Location', 'DisplayPosition', 'Latitude'],
+                ['Response', 'View', 0, 'Result', 0, 'Location', 'DisplayPosition', 'Longitude'],
+                )
     ]
 
     def partial_functor(x):

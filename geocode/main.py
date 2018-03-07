@@ -23,7 +23,7 @@ def request(adr):
             with urllib.request.urlopen(new) as f:
                 res = f.read().decode('utf-8')
                 json_data = json.loads(res)
-                # print(json.dumps(json_data, indent=4, sort_keys=True))
+                print(json.dumps(json_data, indent=4, sort_keys=True))
 
                 lat = json_data
                 for k in url[1]:
