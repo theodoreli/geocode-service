@@ -15,8 +15,8 @@ vars = {
 class GeocodeSources():
     def __init__(self):
         config = configparser.ConfigParser()
-        # TODO: solidify this read
-        config.read(op.join('geocode', 'sources.ini'))
+        curr_dir = op.dirname(op.realpath(__file__))
+        config.read(op.join(curr_dir, 'sources.ini'))
 
         self.geocode_sources = {}
         gs = self.geocode_sources
@@ -27,7 +27,6 @@ class GeocodeSources():
 
             gs[section]['lat'] = json.loads(config.get(section, 'lat'))
             gs[section]['long'] = json.loads(config.get(section, 'long'))
-
 
     def get_sources_dict(self):
         return self.geocode_sources

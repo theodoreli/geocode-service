@@ -13,7 +13,6 @@ class Request():
         geocode_sources = GeocodeSources()
         self.sources_dict = geocode_sources.get_sources_dict()
 
-
     def request(self, adr):
         for source in self.sources_dict:
             try:
