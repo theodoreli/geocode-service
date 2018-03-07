@@ -12,13 +12,14 @@ from geocode_sources import *
 
 app = Flask(__name__)
 
+geocode_sources = GeocodeSources()
+sources_dict = geocode_sources.get_sources_dict()
+
 def request(adr):
-    url_collection = get_url_gen()
-    print(url_collection)
-    for url in url_collection:
+    for source in sources_dict:
         try:
-            print(url)
-            new = url[0](adr=adr)
+            print(source)
+            new = source[0](adr=adr)
             print(new)
             with urllib.request.urlopen(new) as f:
                 res = f.read().decode('utf-8')
@@ -26,11 +27,11 @@ def request(adr):
                 print(json.dumps(json_data, indent=4, sort_keys=True))
 
                 lat = json_data
-                for k in url[1]:
+                for k in source[1]:
                     lat = lat[k]
 
                 lng = json_data
-                for k in url[2]:
+                for k in source[2]:
                     lng = lng[k]
 
                 return lat,lng
