@@ -14,14 +14,25 @@ class GeocodeSources():
     }
 
     def __init__(self):
+        '''Construct a dictionary that contains our geocode sources.
+
+        An example of a source key value pair is the following:
+        source : {
+                    url: `url of geocode source`
+                    lat: `Path to traverse for returned JSON to get Lattitude`
+                    long: `Path to traverse for returned JSON to get Longitude`
+                  }
+        '''
         config = configparser.ConfigParser()
         curr_dir = op.dirname(op.realpath(__file__))
         config.read(op.join(curr_dir, 'sources.ini'))
 
         self.geocode_sources = {}
-        gs = self.geocode_sources
+        gs = self.geocode_sources # eg. ['google', 'here']
         for section in config.sections():
             gs[section] = {}
+
+            # Partially format the url.
             gs[section]['url'] = (config.get(section, 'url')).format
             gs[section]['url'] = partial(gs[section]['url'], **self.env_vars)
 

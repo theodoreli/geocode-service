@@ -14,6 +14,15 @@ class Request():
         self.sources_dict = geocode_sources.get_sources_dict()
 
     def request(self, adr):
+        '''Given an addreess, request the geocode.
+
+        In the case that one geocoding source is not accessible, there are
+        multiple sources that are available in `sources_dict`.
+
+        Note that the `url` key of `sources_dict` is a partially formatted
+        string. This saves us time in that we only need to format a subset of
+        values upon receiving a request.
+        '''
         for source in self.sources_dict:
             try:
                 formatted_url = self.sources_dict[source]['url'](adr=adr)
