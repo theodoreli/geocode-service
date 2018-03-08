@@ -23,7 +23,13 @@ Running
 -------------
 
 Ensure that you have a credentials file `creds.sh` that exports the required
-environment variables so that our app can access the geocode sources.
+environment variables so that our app can access the various geocode sources.
+
+An example `creds.sh` file:
+
+    export API_KEY_GOOGLEMAPS=your_google_key
+    export API_KEY_HERE_ID=your_here_key
+    export API_KEY_HERE_CODE=_your_here_key
 
 Start the server with the run script:
 
