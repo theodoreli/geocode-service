@@ -16,7 +16,6 @@ if env_app_dict['debug'] == 'true':
     L.setLevel(logging.DEBUG)
 
 app = Flask(__name__)
-PORT = env_app_dict['port']
 
 
 @app.route('/')
@@ -37,4 +36,4 @@ def get_geocode(address):
 
 if __name__ == '__main__':
     L.info('Starting Flask application')
-    app.run(port=PORT)
+    app.run(port=env_app_dict['port'])
