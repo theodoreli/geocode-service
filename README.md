@@ -11,23 +11,26 @@ Setup
 ------------
 
 These instructions are for OS X and it probably works on Linux as well.
-You need Python 3 and Virtualenv installed
+You need Python 3 and Virtualenv installed.
+
+Create the virtual environment and install the dependencies with:
 
 
     $ pip install virtualenv
     $ ./RUN build
-    
-Be sure to also drop in your credentials (TODO: codify this)
 
 
 Running
 -------------
 
-Start the server with the run script
+Ensure that you have a credentials file `creds.sh` that exports the required
+environment variables so that our app can access the geocode sources.
+
+Start the server with the run script:
 
     ./RUN serve
 
-Then send an http GET request to the server in another terminal (or whichever is your preferred way)
+Then send an http GET request to the server in another terminal (or whichever is your preferred way):
 
     $ curl localhost:5000/geocode/1600+Amphitheatre+Parkway,+Mountain+View,+CA
     37.4224082,-122.0856086

@@ -5,7 +5,8 @@ cd $BASE_DIR
 set -e
 
 INSTALL_DIR="$BASE_DIR/_install"
-PY_VERSION=python3.6.4
+PY_VERSION=python
+NAME=geocode
 
 usage() {
     cat <<DONE
@@ -38,17 +39,16 @@ serve() {
     echo "Running web server"
     venv_activate
     [[ -e creds.sh ]] && source creds.sh
-    python server.py
+    python $NAME/server.py
     deactivate
 }
 
 lint() {
-    build
     echo "running linters"
     venv_activate
     set +e
     echo "============================ flake8 ============================"
-    flake8 geocode
+    flake8 $NAME
     set -e
     deactivate
 }
