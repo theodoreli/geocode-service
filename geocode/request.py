@@ -36,11 +36,19 @@ def request(adr):
                 for k in sources_dict[source]['lat']:
                     lat = lat[k]
 
-                lng = json_data
+                long = json_data
                 for k in sources_dict[source]['long']:
-                    lng = lng[k]
+                    long = long[k]
 
-                return lat, lng
+                data = {'address_requested': adr,
+                        'geocoded_address': {'latitude': lat,
+                                             'longitude': long,
+                                             'source': source}}
+
+                return data
+
         except BaseException as ex:
             L.info('Geocode source "{}" produced error: {}'.
                    format(source, ex))
+    else:
+        return {'error': 'Not able to geocode address'}

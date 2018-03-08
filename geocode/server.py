@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import json
 import os
 import sys
 
@@ -28,12 +29,9 @@ def index():
 def get_geocode(address):
     '''Given an address, return the lattitude and longitude as a string'''
     L.info('Received address: {}'.format(address))
-    lat, lng = request(address)
-
-    lat_long = '{},{}'.format(str(lat), str(lng))
-    L.info('Latitude and Logitude respectively: {}'.format(lat_long))
-
-    return lat_long
+    geocoded_data = request(address)
+    L.info('Geocoded address: {}'.format(geocoded_data))
+    return json.dumps(geocoded_data)
 
 
 if __name__ == '__main__':
