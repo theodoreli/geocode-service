@@ -7,7 +7,7 @@ import sys
 
 from flask import Flask
 
-from request import Request
+from request import request
 
 L = logging.getLogger()
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
@@ -15,7 +15,6 @@ if os.environ.get('APP_DEBUG') == 'true':
     L.setLevel(logging.DEBUG)
 
 app = Flask(__name__)
-req = Request()
 
 
 @app.route('/')
@@ -29,7 +28,7 @@ def index():
 def get_geocode(address):
     '''Given an address, return the lattitude and longitude as a string'''
     L.info('Received address: {}'.format(address))
-    lat, lng = req.request(address)
+    lat, lng = request(address)
 
     lat_long = '{},{}'.format(str(lat), str(lng))
     L.info('Latitude and Logitude respectively: {}'.format(lat_long))
