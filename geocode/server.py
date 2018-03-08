@@ -3,20 +3,20 @@
 
 import logging
 import json
-import os
 import sys
 
 from flask import Flask
 
+from env_variables import env_app_dict
 from request import request
 
 L = logging.getLogger()
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-if os.environ.get('APP_DEBUG') == 'true':
+if env_app_dict['debug'] == 'true':
     L.setLevel(logging.DEBUG)
 
 app = Flask(__name__)
-PORT = os.getenv('APP_PORT', 5000)
+PORT = env_app_dict['port']
 
 
 @app.route('/')

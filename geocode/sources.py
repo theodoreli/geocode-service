@@ -3,16 +3,10 @@
 
 import configparser
 import json
-import os
 import os.path as op
 from functools import partial
 
-
-env_vars = {
-    'api_key_googlemaps': os.environ.get('API_KEY_GOOGLEMAPS'),
-    'api_key_here_id': os.environ.get('API_KEY_HERE_ID'),
-    'api_key_here_code': os.environ.get('API_KEY_HERE_CODE')
-}
+from env_variables import env_api_dict
 
 
 def get_sources_dict():
@@ -35,7 +29,7 @@ def get_sources_dict():
 
         # Partially format the url.
         gs[section]['url'] = (config.get(section, 'url')).format
-        gs[section]['url'] = partial(gs[section]['url'], **env_vars)
+        gs[section]['url'] = partial(gs[section]['url'], **env_api_dict)
 
         gs[section]['lat'] = json.loads(config.get(section, 'lat'))
         gs[section]['long'] = json.loads(config.get(section, 'long'))
