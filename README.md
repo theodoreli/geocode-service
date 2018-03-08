@@ -1,8 +1,9 @@
 Geocode Service
 ==================
 
-Geocode Service is a Python server that will geocode an address that you pass in. That is, it will return the longitude and lattitude
-of a given address.
+Geocode Service is a Python server that will geocode an address that you pass in. That is:
+1. Via the REST interface, input the address after the `geocode` noun
+2. The server will return a JSON response with the geocode
 
 There are Geocode service sources encoded in `sources.ini` that this service will try in the order defined. The service will return the result
 of the first service that is succesful. Otherwise, the service returns an error.
