@@ -4,12 +4,11 @@ import json
 import logging
 import urllib.request
 
-from geocode_sources import GeocodeSources
+from geocode_sources import get_sources_dict
 
 L = logging.getLogger()
 
-geocode_sources = GeocodeSources()
-sources_dict = geocode_sources.get_sources_dict()
+sources_dict = get_sources_dict()
 
 
 def request(adr):
@@ -32,10 +31,12 @@ def request(adr):
                 json_data = json.loads(res)
                 L.debug(json.dumps(json_data, indent=4, sort_keys=True))
 
+                # Traverse the structure to access latitude.
                 lat = json_data
                 for k in value['lat']:
                     lat = lat[k]
 
+                # Traverse the structure to access longitude.
                 long = json_data
                 for k in value['long']:
                     long = long[k]
