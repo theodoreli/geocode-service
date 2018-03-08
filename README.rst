@@ -16,6 +16,8 @@ You need Python 3 and Virtualenv installed.
 
 Create the virtual environment and install the dependencies with:
 
+.. code-block:: bash
+
     $ ./RUN build
 
 
@@ -35,9 +37,13 @@ An example `creds.sh` file:
 
 Start the server with the run script:
 
+.. code-block:: bash
+
     $ ./RUN serve
 
 Then send an http GET request to the server in another terminal (or whichever is your preferred way):
+
+.. code-block:: bash
 
     $ curl localhost:5000/geocode/1600+Amphitheatre+Parkway,+Mountain+View,+CA
     {"address_requested": "1600+Amphitheatre+Parkway,+Mountain+View,+CA", "geocoded_address": {"latitude": 37.4224082, "longitude": -122.0856086, "source": "google"}}
