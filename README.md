@@ -31,4 +31,4 @@ Start the server with the run script:
 Then send an http GET request to the server in another terminal (or whichever is your preferred way):
 
     $ curl localhost:5000/geocode/1600+Amphitheatre+Parkway,+Mountain+View,+CA
-    37.4224082,-122.0856086
+    {"address_requested": "1600+Amphitheatre+Parkway,+Mountain+View,+CA", "geocoded_address": {"latitude": 37.4224082, "longitude": -122.0856086, "source": "google"}}
