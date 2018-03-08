@@ -4,4 +4,5 @@ lib/
 pip-selfcheck.json
 .Python
 
+creds.sh
 *.pyc

@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+BASE_DIR=$(dirname $0)
+cd $BASE_DIR
+set -e
+
+INSTALL_DIR="$BASE_DIR/_install"
+PY_VERSION=python3.6.4
+
+usage() {
+    cat <<DONE
+    usage: $0 <action>
+
+    Available actions:
+        build
+        cleanvenv
+        lint
+        serve
+DONE
+}
+
+venv_activate() {
+    type virtualenv &> /dev/null || {
+        echo "virtualenv is not installed. Install it and then proceed" && exit 1
+    }
+    [ ! -d $INSTALL_DIR ] &&  virtualenv --python=${PY_VERSION} $INSTALL_DIR
+    source $INSTALL_DIR/bin/activate
+}
+
+build() {
+    echo "Building project requirements"
+    venv_activate
+    pip install -r requirements.txt
+    deactivate
+}
+
+serve() {
+    echo "Running web server"
+    venv_activate
+    [[ -e creds.sh ]] && source creds.sh
+    python server.py
+    deactivate
+}
+
+lint() {
+    build
+    echo "running linters"
+    venv_activate
+    set +e
+    echo "============================ flake8 ============================"
+    flake8 geocode
+    set -e
+    deactivate
+}
+
+cleanvenv() {
+    rm -rf _install
+}
+
+
+[ $# = 0 ] && usage && exit 1
+CMD=$1
+shift
+$CMD $@
+exit $?
