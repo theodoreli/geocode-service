@@ -4,7 +4,7 @@ import json
 import logging
 import urllib.request
 
-from geocode_sources import get_sources_dict
+from sources import get_sources_dict
 
 L = logging.getLogger()
 

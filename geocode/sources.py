@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+'''Parse and partially format Geocode Sources from `config.ini`.'''
 
 import configparser
 import json
