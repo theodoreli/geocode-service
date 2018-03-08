@@ -27,13 +27,15 @@ environment variables so that our app can access the various geocode sources.
 
 An example `creds.sh` file:
 
+.. code-block:: bash
+
     export API_KEY_GOOGLEMAPS=your_google_key
     export API_KEY_HERE_ID=your_here_key
     export API_KEY_HERE_CODE=_your_here_key
 
 Start the server with the run script:
 
-    ./RUN serve
+    $ ./RUN serve
 
 Then send an http GET request to the server in another terminal (or whichever is your preferred way):
 
