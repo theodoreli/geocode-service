@@ -22,10 +22,10 @@ def request(adr):
     string. This saves us time in that we only need to format a subset of
     values upon receiving a request.
     '''
-    for source in sources_dict:
+    for key, value in sources_dict.items():
         try:
             # Format the partially formatted `url` string.
-            formatted_url = sources_dict[source]['url'](adr=adr)
+            formatted_url = value['url'](adr=adr)
 
             with urllib.request.urlopen(formatted_url) as f:
                 res = f.read().decode('utf-8')
@@ -33,22 +33,22 @@ def request(adr):
                 L.debug(json.dumps(json_data, indent=4, sort_keys=True))
 
                 lat = json_data
-                for k in sources_dict[source]['lat']:
+                for k in value['lat']:
                     lat = lat[k]
 
                 long = json_data
-                for k in sources_dict[source]['long']:
+                for k in value['long']:
                     long = long[k]
 
                 data = {'address_requested': adr,
                         'geocoded_address': {'latitude': lat,
                                              'longitude': long,
-                                             'source': source}}
+                                             'source': key}}
 
                 return data
 
         except BaseException as ex:
             L.info('Geocode source "{}" produced error: {}'.
-                   format(source, ex))
+                   format(key, ex))
     else:
         return {'error': 'Not able to geocode address'}
