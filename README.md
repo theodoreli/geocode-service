@@ -15,8 +15,6 @@ You need Python 3 and Virtualenv installed.
 
 Create the virtual environment and install the dependencies with:
 
-
-    $ pip install virtualenv
     $ ./RUN build
 
 
