@@ -33,7 +33,7 @@ An example `creds.sh` file:
 
     export API_KEY_GOOGLEMAPS=your_google_key
     export API_KEY_HERE_ID=your_here_key
-    export API_KEY_HERE_CODE=_your_here_key
+    export API_KEY_HERE_CODE=your_here_key
 
 Start the server with the run script:
 
